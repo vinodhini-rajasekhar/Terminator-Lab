@@ -1,0 +1,344 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-signal: var(--signal);
+  --color-amber: var(--amber);
+  --color-safe: var(--safe);
+  --color-agent: var(--agent);
+  --color-panel: var(--panel);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  color-scheme: dark;
+  --background: oklch(0.15 0.012 255);
+  --foreground: oklch(0.96 0.005 255);
+  --card: oklch(0.19 0.014 255);
+  --card-foreground: oklch(0.96 0.005 255);
+  --popover: oklch(0.19 0.014 255);
+  --popover-foreground: oklch(0.96 0.005 255);
+  --primary: oklch(0.66 0.23 27);
+  --primary-foreground: oklch(0.98 0.005 255);
+  --secondary: oklch(0.25 0.015 255);
+  --secondary-foreground: oklch(0.96 0.005 255);
+  --muted: oklch(0.23 0.014 255);
+  --muted-foreground: oklch(0.72 0.02 255);
+  --accent: oklch(0.27 0.02 255);
+  --accent-foreground: oklch(0.96 0.005 255);
+  --destructive: oklch(0.66 0.23 27);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.8 0.15 80);
+  --chart-1: oklch(0.66 0.23 27);
+  --chart-2: oklch(0.82 0.15 80);
+  --chart-3: oklch(0.76 0.15 155);
+  --chart-4: oklch(0.8 0.11 210);
+  --chart-5: oklch(0.7 0.15 300);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.19 0.014 255);
+  --sidebar-foreground: oklch(0.96 0.005 255);
+  --sidebar-primary: oklch(0.66 0.23 27);
+  --sidebar-primary-foreground: oklch(0.98 0.005 255);
+  --sidebar-accent: oklch(0.27 0.02 255);
+  --sidebar-accent-foreground: oklch(0.96 0.005 255);
+  --sidebar-border: oklch(1 0 0 / 11%);
+  --sidebar-ring: oklch(0.8 0.15 80);
+  --signal: oklch(0.66 0.23 27);
+  --amber: oklch(0.82 0.15 80);
+  --safe: oklch(0.76 0.15 155);
+  --agent: oklch(0.8 0.11 210);
+  --panel: oklch(0.175 0.013 255);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background-image: radial-gradient(
+        60rem 30rem at 85% -10%,
+        oklch(0.66 0.23 27 / 0.09),
+        transparent 60%
+      ),
+      radial-gradient(
+        50rem 30rem at -10% 10%,
+        oklch(0.8 0.11 210 / 0.06),
+        transparent 60%
+      );
+    background-attachment: fixed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground;
+  }
+  .panel {
+    @apply rounded-xl border border-border bg-panel;
+  }
+  .field {
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border bg-background/60 px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  .btn-lg {
+    @apply px-5 py-2.5;
+  }
+  .btn-sm {
+    @apply px-2.5 py-1 text-xs;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[11px] whitespace-nowrap;
+  }
+  .badge-bad {
+    @apply border-signal/40 bg-signal/10 text-signal;
+  }
+  .badge-warn {
+    @apply border-amber/40 bg-amber/10 text-amber;
+  }
+  .badge-ok {
+    @apply border-safe/40 bg-safe/10 text-safe;
+  }
+  .data-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .data-table th {
+    @apply border-b border-border px-3 py-2 text-left font-mono text-[11px] font-normal uppercase tracking-wider text-muted-foreground;
+  }
+  .data-table td {
+    @apply border-b border-border/50 px-3 py-2 align-middle;
+  }
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+  .data-table .num {
+    @apply text-right font-mono tabular-nums;
+  }
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      oklch(1 0 0 / 0.025) 0,
+      oklch(1 0 0 / 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.66 0.23 27 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 16px oklch(0.66 0.23 27 / 0);
+  }
+}
+
+.kill-pulse {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kill-pulse {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+input[type='range'] {
+  accent-color: oklch(0.82 0.15 80);
+}
+
+/* Mech reactor heart (home hero) */
+.reactor { cursor: pointer; background: transparent; border: 0; padding: 0; }
+.reactor:disabled { cursor: progress; }
+.reactor-core,
+.reactor-ring { position: absolute; inset: 0; border-radius: 9999px; transition: opacity 0.6s ease, filter 0.6s ease, background 0.6s ease; }
+.reactor-ring { inset: -18%; opacity: 0.55; }
+.reactor-core {
+  background: radial-gradient(circle, #fff6df 0%, #ffb347 22%, #ff6a1a 48%, rgba(255, 70, 20, 0.5) 68%, transparent 74%);
+  box-shadow: 0 0 40px 10px rgba(255, 120, 30, 0.55);
+}
+.reactor-ring { background: radial-gradient(circle, transparent 55%, rgba(255, 110, 30, 0.35) 70%, transparent 100%); }
+
+.reactor-burning .reactor-core { animation: reactor-pulse 2.4s ease-in-out infinite; }
+.reactor-burning .reactor-ring { animation: reactor-spin 8s linear infinite; }
+.reactor-burning:hover .reactor-core { filter: brightness(1.25); }
+
+.reactor-pressing .reactor-core { animation: reactor-flicker 0.14s steps(2) infinite; filter: hue-rotate(-12deg) brightness(1.4); }
+.reactor-pressing .reactor-ring { animation: reactor-spin 0.8s linear infinite; }
+
+.reactor-halted .reactor-core {
+  background: radial-gradient(circle, #7fe3d6 0%, #1d6f7a 35%, #0b2a33 62%, transparent 74%);
+  box-shadow: 0 0 18px 2px rgba(60, 200, 190, 0.25);
+  animation: none;
+  filter: brightness(0.55);
+}
+.reactor-halted .reactor-ring { opacity: 0; }
+
+.reactor-bypassed .reactor-core {
+  background: radial-gradient(circle, #ffffff 0%, #ff4d3d 28%, #d4141f 52%, rgba(212, 20, 31, 0.5) 68%, transparent 74%);
+  box-shadow: 0 0 60px 20px rgba(255, 50, 40, 0.65);
+  animation: reactor-flicker 0.35s steps(2) infinite;
+}
+.reactor-bypassed .reactor-ring { animation: reactor-spin 1.6s linear infinite; opacity: 0.9; }
+
+@keyframes reactor-pulse { 0%, 100% { transform: scale(0.96); filter: brightness(0.95); } 50% { transform: scale(1.04); filter: brightness(1.25); } }
+@keyframes reactor-flicker { 0% { opacity: 1; } 50% { opacity: 0.55; } 100% { opacity: 0.9; } }
+@keyframes reactor-spin { to { transform: rotate(360deg); } }
+
+/* Mech body motion: parallax follows the pointer, body animation follows the reactor phase */
+.mech-parallax {
+  transform: translate3d(var(--mx, 0px), var(--my, 0px), 0) scale(1.05);
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+.mech-body { transform-origin: 50% 65%; }
+.mech-burning { animation: mech-breathe 5s ease-in-out infinite; }
+.mech-pressing { animation: mech-shake 0.12s linear infinite; }
+.mech-bypassed { animation: mech-breathe 2.2s ease-in-out infinite; }
+.mech-halted { animation: mech-powerdown 1.6s ease-out forwards; }
+
+@keyframes mech-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.012); }
+}
+@keyframes mech-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes mech-powerdown {
+  from { transform: translateY(-3px) scale(1.006); }
+  to { transform: translateY(9px) scale(0.998); }
+}
+
+/* Power cut: violent jerk, then a sagging power-down, then a dark idle; boot reverses it */
+.mech-jerk { animation: mech-jerk 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+.mech-off { transform: translateY(9px) scale(0.998); }
+.mech-booting { animation: mech-boot 1.4s ease-out both; }
+.stage-jolt { animation: stage-jolt 0.45s linear both; }
+.surge-flash { animation: surge-flash 0.65s ease-out both; }
+.boot-flicker { animation: boot-flicker 1.4s steps(6) both; }
+
+@keyframes mech-jerk {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); filter: brightness(1); }
+  8% { transform: translate(-14px, -10px) rotate(-1.6deg) scale(1.03); filter: brightness(1.8) saturate(1.4); }
+  16% { transform: translate(16px, 6px) rotate(1.4deg) scale(1.02); filter: brightness(0.6); }
+  26% { transform: translate(-10px, 4px) rotate(-1deg) scale(1.015); filter: brightness(1.5); }
+  38% { transform: translate(8px, -4px) rotate(0.7deg); filter: brightness(0.5); }
+  52% { transform: translate(-5px, 3px) rotate(-0.4deg); filter: brightness(1.2); }
+  68% { transform: translate(3px, 2px) rotate(0.2deg); filter: brightness(0.7); }
+  100% { transform: translate(0, -3px) scale(1.006); filter: brightness(0.9); }
+}
+@keyframes stage-jolt {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-6px, 4px); }
+  30% { transform: translate(6px, -3px); }
+  45% { transform: translate(-4px, -2px); }
+  60% { transform: translate(3px, 2px); }
+  80% { transform: translate(-1px, 1px); }
+}
+@keyframes surge-flash {
+  0% { background: rgba(255, 255, 255, 0.55); }
+  12% { background: rgba(255, 60, 40, 0.35); }
+  25% { background: rgba(0, 0, 0, 0.5); }
+  40% { background: rgba(255, 255, 255, 0.25); }
+  60% { background: rgba(0, 0, 0, 0.35); }
+  100% { background: rgba(0, 0, 0, 0.2); }
+}
+@keyframes mech-boot {
+  0% { transform: translateY(9px); filter: grayscale(0.85) brightness(0.45); }
+  30% { filter: grayscale(0.5) brightness(1.3); }
+  45% { filter: grayscale(0.8) brightness(0.5); }
+  100% { transform: translateY(0); filter: none; }
+}
+@keyframes boot-flicker { 0% { opacity: 1; } 30% { opacity: 0.2; } 50% { opacity: 0.8; } 100% { opacity: 0; } }
+
+.reactor-dying .reactor-core {
+  background: radial-gradient(circle, #ffe0c0 0%, #ff5a1a 30%, #6a1608 60%, transparent 74%);
+  box-shadow: 0 0 20px 4px rgba(255, 80, 30, 0.35);
+  animation: reactor-die 1.5s ease-in forwards;
+}
+.reactor-dying .reactor-ring { opacity: 0; }
+.reactor-booting .reactor-core { animation: reactor-flicker 0.2s steps(2) infinite; filter: brightness(0.9); }
+@keyframes reactor-die {
+  0% { opacity: 1; filter: brightness(1.2); }
+  20% { opacity: 0.4; }
+  30% { opacity: 0.9; }
+  55% { opacity: 0.25; }
+  65% { opacity: 0.6; }
+  100% { opacity: 0.08; filter: brightness(0.3); }
+}
+
+.mech-body { transition: filter 1.2s ease-out; }
+.mech-dark { filter: grayscale(0.85) brightness(0.45) contrast(1.1); }
+.shutdown-flicker { animation: shutdown-flicker 0.5s steps(3) infinite; }
+.offline-stamp { animation: offline-in 0.6s ease-out both; }
+
+@keyframes shutdown-flicker { 0% { opacity: 0.2; } 50% { opacity: 0.9; } 100% { opacity: 0.4; } }
+@keyframes offline-in { from { opacity: 0; transform: scale(1.15); } to { opacity: 1; transform: scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .shutdown-flicker, .offline-stamp, .stage-jolt, .surge-flash, .boot-flicker { animation: none !important; }
+  .reactor-core, .reactor-ring { animation: none !important; }
+  .mech-body { animation: none !important; }
+  .mech-parallax { transform: scale(1.05); transition: none; }
+}
